@@ -98,9 +98,8 @@ int Binary_search(struct Array array, int key)
 	               high = mid - 1;
 	        else if (key > array.A[mid])
 	        	low = mid + 1;
-	        else
-	        	return -1;
 	}
+	return -1;
 }
 
 int Recursive_bin_ser(int arr[], int low, int high, int key)
@@ -120,6 +119,113 @@ int Recursive_bin_ser(int arr[], int low, int high, int key)
 	return -1;
 }
 
+void Get(struct Array array, int index)
+{
+	if (index >= 0 && index < array.length)
+	{
+		printf("The value at index %d is %d\n",
+				index, array.A[index]);
+	}
+}
+
+void Set(struct Array *arr, int index, int value)
+{
+	if ( index >= 0 && index < arr->length)
+	{	
+		arr->A[index] = value;
+
+		printf("The Value at array index %d is changed to %d\n",
+				index, arr->A[index]);
+	}	
+}
+
+int Max(struct Array arr)
+{
+	int max, i;
+
+	max = arr.A[0];
+	if (arr.length == 0 || arr.size == 0)
+		return -1;
+	for (i = 1; i < arr.length; i++)
+	{
+		if (arr.A[i] > max)
+			max = arr.A[i];
+	}
+	
+	return max;
+}
+
+int Min (struct Array arr)
+{
+	int min, i;
+
+	min = arr.A[0];
+
+	for (i = 1; i < arr.length; i++)
+	{
+		if(min > arr.A[i])
+			min = arr.A[i];
+	}
+	return min;
+}
+
+int Sum(int arr[], int length)
+{
+	int i, sum = 0;
+
+	for (i = 0; i < length; i++)
+		sum = sum + arr[i];
+
+	return sum;
+}
+
+int Avg(struct Array arr)
+{
+	int avg = 0;
+
+	avg = (Sum(arr.A, arr.length)/(arr.length - 1));
+
+	return avg;
+}
+
+void Reverse(struct Array *arr, int start, int end)
+{
+	int i, j;
+
+	for (i = start, j = (end - 1); i < j; i++, j--)
+	{
+		arr->A[i] = arr->A[i] + arr->A[j];
+		arr->A[j] = arr->A[i] - arr->A[j];
+		arr->A[i] = arr->A[i] - arr->A[j];
+	}
+
+}
+void left_rotate_by_one(struct Array *arr, int size);
+void Left_rotate(struct Array *arr, int no_of_rotations)
+{
+	int i;
+	
+	for (i = 0; i < no_of_rotations; i++)
+		left_rotate_by_one(arr, arr->length);
+}
+
+void left_rotate_by_one(struct Array *arr, int size)
+{
+	int i, temp = arr->A[0];
+	for ( i = 0; i < size - 1; i++)
+		arr->A[i] = arr->A[i + 1];
+	arr->A[i] = temp;
+}
+
+void Left_rotate_by_revese(struct Array *arr, int no_of_rotations,int size )
+{
+	Reverse(arr, 0, no_of_rotations);
+	Reverse(arr, no_of_rotations , size);
+	Reverse(arr, 0, size);
+}
+
+
+
 
 void main()
 {
@@ -127,6 +233,7 @@ void main()
 	int elem_to_append, elem;
 	int index, key;
 	int arr_indx, elem_to_ins;
+	int value;
 
 	
 	array.length = 0;
@@ -193,14 +300,34 @@ void main()
 	else
 		printf("Value %d found at index %d\n", key, index);
 
+	value = Max(array);
+	printf("The maximum value in the given array is %d\n", value);
 
+	value = Min(array);
+	printf("The minimum value in the given array is %d\n", value);
+
+	value = Sum(array.A, array.length);
+	printf("The sum of all elements in the given array is %d\n", value);
+
+	value = Avg(array);
+	printf("The Avg of all elements in the given array is %d\n", value);
+
+	Reverse(&array, 0, array.length);
+	printf("The Reverse of the given array is\n");
+	Display(array);
+/*
+	printf("Enter the no of rotations\n");
+	scanf("%d",&value);
+	Left_rotate(&array,value);
+        Display(array);	
+
+*/	printf("Enter the no of rotations\n");
+	scanf("%d",&value);
+	Left_rotate_by_revese(&array,value, array.length);
+        Display(array);	
+
+
+
+	
 }
-
-
-
-
-
-
-
-
 
