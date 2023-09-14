@@ -1,2 +1,19 @@
 This directory contains code for bit manipulation
 
+1. File Name :- bit_manipulation.c
+   /* 
+    * This File contains code for bit manipulation
+    *
+    * Operations like:
+    * 1.  setting nth bit
+    * 2.  clearing/unsetting nth bit
+    * 3.  toggling nth bit
+    * 4.  checking nth bit is set or not
+    * 5.  inverting every bit of a number (1's Complement)
+    * 6.  2's complement
+    * 7.  Stripping off the lowest set bit of a number
+    * 8.  getting lowest set bit of a number
+    * 9.  
+    *
+    */  
+2. File Name:- even_odd.c
