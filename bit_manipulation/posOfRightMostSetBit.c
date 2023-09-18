@@ -3,12 +3,18 @@
 int positionOfRightMostSetbit(int num)
 {
     int pos = 0;
-    num = (num & (num - 1)) ^ num ;
+
+    if (num & 1)
+        return 1;
+    
+    num = num ^ (num & (num - 1));
+
     while (num)
     {
         num = num >> 1;
         pos++;
     }
+
     return pos;
 }
 
